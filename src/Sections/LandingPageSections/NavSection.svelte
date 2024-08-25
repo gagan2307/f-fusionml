@@ -17,7 +17,7 @@
 	}
 </script>
 
-<nav class="fixed left-0 top-0 z-10 w-full bg-white/10 backdrop-blur-md">
+<nav class="fixed left-0 top-0 z-20 w-full bg-white/10 backdrop-blur-md">
 	<div class="custom-padding mx-auto w-full px-0">
 		<div class="flex h-20 items-center justify-between">
 			<!-- Logo Placeholder -->
@@ -35,7 +35,7 @@
 			</div>
 
 			<!-- Mobile Menu Button -->
-			<div class="flex items-center md:hidden">
+			<div class="z-30 flex items-center md:hidden">
 				<button
 					on:click={() => {
 						isMenuOpen = !isMenuOpen;
@@ -64,7 +64,7 @@
 	<!-- Mobile Menu -->
 	{#if isMenuOpen}
 		<div
-			class="bg-white/10 backdrop-blur-md md:hidden"
+			class="z-20 bg-white/20 backdrop-blur-md md:hidden"
 			transition:combinedTransition={{ duration: 300 }}
 			style="position: absolute; top: 100%; left: 0; right: 0;"
 		>
