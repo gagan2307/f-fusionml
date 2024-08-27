@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^6.6.0",
 		"f-fusionml": "file:"
 	}
 }

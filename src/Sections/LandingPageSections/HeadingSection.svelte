@@ -1,5 +1,5 @@
 <script>
-	// No script needed unless you want to add interactivity later.
+	import CustomGradiantButton from '../../Components/CustomGradiantButton/CustomGradiantButton.svelte';
 </script>
 
 <section class="custom-padding flex h-screen w-full items-start justify-center lg:justify-start">
@@ -12,6 +12,12 @@
 		<p class="mt-2 text-base font-semibold text-gray-700 sm:text-2xl md:text-lg lg:text-[1.725rem]">
 			The Comprehensive Platform<br />For ML Innovation
 		</p>
+
+		<!-- Button Placement -->
+		<div class="mt-12 flex justify-center space-x-4 lg:justify-start lg:space-x-6">
+			<CustomGradiantButton label="Machine Learning" />
+			<CustomGradiantButton label="Deep Learning" />
+		</div>
 	</div>
 </section>
 
@@ -53,8 +59,9 @@
 			font-size: 1.25rem; /* Larger subheading for small screens */
 		}
 	}
+
 	@media (max-width: 640px) {
-		/* Increase font size on small screens */
+		/* Adjust font size for very small screens */
 		h1 {
 			font-size: 2.34rem; /* Larger heading for small screens */
 		}
