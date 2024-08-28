@@ -16,10 +16,10 @@
 
 		<!-- Social Media Icons -->
 		<div class="flex space-x-4">
-			<a href="https://linkedin.com" target="_blank" class="text-black hover:text-gray-700">
+			<a href="#" target="_blank" class="text-black hover:text-gray-700">
 				<i class="fab fa-linkedin"></i>
 			</a>
-			<a href="https://github.com" target="_blank" class="text-black hover:text-gray-700">
+			<a href="#" target="_blank" class="text-black hover:text-gray-700">
 				<i class="fab fa-github"></i>
 			</a>
 		</div>
