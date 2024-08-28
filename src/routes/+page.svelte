@@ -5,7 +5,7 @@
 	import FooterSection from '../Sections/LandingPageSections/FooterSection.svelte';
 </script>
 
-<main class="relative h-screen w-screen">
+<main class="relative flex min-h-screen w-screen flex-col">
 	<!-- Navbar-Section -->
 	<section id="navbar">
 		<NavSection />
@@ -16,13 +16,13 @@
 		<img src={BG} alt="BackgroundImage" class="h-full w-full object-cover" />
 	</div>
 
-	<!-- Heading-Section -->
-	<section id="heading" class="absolute inset-0 z-10 flex flex-col items-center justify-center">
+	<!-- Content Section -->
+	<section id="content" class="flex flex-grow flex-col items-center justify-center">
 		<HeadingSection />
 	</section>
 
 	<!-- Footer Section -->
-	<section id="footer" class="absolute inset-x-0 bottom-0 z-10">
+	<section id="footer" class="z-10">
 		<FooterSection />
 	</section>
 </main>

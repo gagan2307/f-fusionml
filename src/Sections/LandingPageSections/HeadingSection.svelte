@@ -6,17 +6,19 @@
 	<div
 		class="translate-y-[200px] transform text-center sm:translate-y-[150px] lg:translate-x-[30px] lg:translate-y-[200px] lg:text-left"
 	>
-		<h1 class="text-4xl font-bold text-black sm:text-6xl md:text-6xl lg:text-[8.05rem]">
+		<h1 class="text-5xl font-bold text-black sm:text-6xl md:text-6xl lg:text-[8.05rem]">
 			FusionML
 		</h1>
-		<p class="mt-2 text-base font-semibold text-gray-700 sm:text-2xl md:text-lg lg:text-[1.725rem]">
+		<p class="mt-4 text-lg font-semibold text-gray-700 sm:text-3xl md:text-2xl lg:text-[1.725rem]">
 			The Comprehensive Platform<br />For ML Innovation
 		</p>
 
 		<!-- Button Placement -->
-		<div class="mt-12 flex justify-center space-x-4 lg:justify-start lg:space-x-6">
-			<CustomGradiantButton label="Machine Learning" />
-			<CustomGradiantButton label="Deep Learning" />
+		<div
+			class="mt-12 flex flex-col items-center space-y-4 lg:flex-row lg:justify-start lg:space-x-6 lg:space-y-0"
+		>
+			<CustomGradiantButton label="Machine Learning" class="w-full sm:w-auto" />
+			<CustomGradiantButton label="Deep Learning" class="w-full sm:w-auto" />
 		</div>
 	</div>
 </section>
@@ -41,33 +43,43 @@
 			text-align: center !important;
 		}
 		h1 {
-			font-size: 4.65rem; /* Larger heading for small screens */
+			font-size: 5.65rem; /* Increase heading size */
 		}
 		p {
-			margin-top: 0.5rem;
-			font-size: 1.25rem; /* Larger subheading for small screens */
+			margin-top: 1rem;
+			font-size: 1.75rem; /* Increase subheading size */
 		}
 	}
 
 	@media (max-width: 768px) {
-		/* Increase font size on small screens */
+		/* Increase font size and button size on small screens */
 		h1 {
-			font-size: 4.65rem; /* Larger heading for small screens */
+			font-size: 5.65rem; /* Increase heading size */
 		}
 		p {
-			margin-top: 0.5rem;
-			font-size: 1.25rem; /* Larger subheading for small screens */
+			margin-top: 1rem;
+			font-size: 1.75rem; /* Increase subheading size */
+		}
+		.flex-col .w-full {
+			font-size: 1.5rem;
+			padding: 1.5rem 3rem; /* Increase button size */
 		}
 	}
 
 	@media (max-width: 640px) {
-		/* Adjust font size for very small screens */
+		/* Further adjust font size for very small screens */
 		h1 {
-			font-size: 2.34rem; /* Larger heading for small screens */
+			font-size: 3.34rem; /* Increase heading size */
 		}
 		p {
-			margin-top: 0.5rem;
-			font-size: 1rem; /* Larger subheading for small screens */
+			margin-top: 1rem;
+			font-size: 1.5rem; /* Increase subheading size */
+		}
+
+		/* Increase button size further for very small screens */
+		.flex-col .w-full {
+			font-size: 1.75rem;
+			padding: 2rem 4rem; /* Increase button size */
 		}
 	}
 </style>

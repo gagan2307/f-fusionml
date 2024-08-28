@@ -1,5 +1,5 @@
 <script>
-	// Add any necessary script or props here
+	import fusionMLLogo from '$lib/LandingPage/FusionML_logo.png';
 </script>
 
 <footer
@@ -8,11 +8,10 @@
 	<!-- Left side content with logo and social icons -->
 	<div class="flex flex-col items-center space-y-2">
 		<!-- Logo -->
-		<div class="footer-logo rounded-full bg-gradient-to-r from-pink-400 to-purple-500 p-1">
-			<div class="rounded-full bg-white p-2">
-				<!-- Placeholder for logo, replace with actual logo image -->
-				<span class="font-bold text-pink-500">F</span>
-			</div>
+		<div class="footer-logo p-1">
+			<!-- <div class="rounded-full bg-white p-2"> -->
+			<img src={fusionMLLogo} alt="FusionML Logo" class="h-12 w-32" />
+			<!-- </div> -->
 		</div>
 
 		<!-- Social Media Icons -->
@@ -38,12 +37,14 @@
 		/* Ensure the footer is fully transparent */
 		background-color: transparent;
 		padding-bottom: 20px; /* Add padding at the bottom */
+		padding-top: 10px; /* Add some top padding */
 	}
 
 	.footer-logo {
-		width: 40px;
+		width: 65px;
 		height: 40px;
 		display: flex;
+		padding-bottom: 20px;
 		align-items: center;
 		justify-content: center;
 	}
