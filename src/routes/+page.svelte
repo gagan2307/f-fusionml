@@ -28,5 +28,9 @@
 </main>
 
 <style>
-	/* Additional styles if needed */
+	.headning{
+		font-size: 30px;
+		position: relative;
+		object-fit: contain;
+	}
 </style>

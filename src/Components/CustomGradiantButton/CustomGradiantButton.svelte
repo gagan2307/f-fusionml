@@ -1,8 +1,15 @@
 <script>
 	export let label = 'Button'; // You can customize the button label via props
+	import { goto } from '$app/navigation';
+	export let link = '#';
 </script>
 
-<button class="custom-button rounded-full px-8 py-4 font-bold text-white">
+<button
+	on:click={() => {
+		goto(`${link}`);
+	}}
+	class="custom-button rounded-full px-8 py-4 font-bold text-white"
+>
 	{label}
 </button>
 

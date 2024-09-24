@@ -17,7 +17,7 @@
 		<div
 			class="mt-12 flex flex-col items-center space-y-4 lg:flex-row lg:justify-start lg:space-x-6 lg:space-y-0"
 		>
-			<CustomGradiantButton label="Machine Learning" class="w-full sm:w-auto" />
+			<CustomGradiantButton link="/ml" label="Machine Learning" class="w-full sm:w-auto" />
 			<CustomGradiantButton label="Deep Learning" class="w-full sm:w-auto" />
 		</div>
 	</div>

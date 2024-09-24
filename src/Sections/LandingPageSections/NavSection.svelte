@@ -1,6 +1,7 @@
 <script>
 	import { cubicInOut } from 'svelte/easing';
 	import fusionmlLogo from '$lib/LandingPage/fusionmlLogo.webp';
+	import { goto } from '$app/navigation';
 
 	let isMenuOpen = false;
 
@@ -22,7 +23,16 @@
 		<div class="flex h-20 items-center justify-between">
 			<!-- Logo Placeholder -->
 			<div class="flex-shrink-0">
-				<img src={fusionmlLogo} alt="Logo" class="h-28 w-32" />
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+				<img
+					src={fusionmlLogo}
+					alt="Logo"
+					on:click={() => {
+						goto('/');
+					}}
+					class="h-28 w-32"
+				/>
 			</div>
 
 			<!-- Navbar Links -->
