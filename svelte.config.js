@@ -12,6 +12,6 @@
 
 // export default config;
 
-import adapter from '@sveltejs/adapter-node';
+import adapter from 'svelte-adapter-static-digitalocean';
 export default { kit: { adapter: adapter() } };
 

@@ -45,7 +45,7 @@
 <div class="flex w-full flex-col justify-between px-10 lg:mt-20 lg:flex-row">
 	<!-- Heading on the left -->
 	<h1
-		class="-mt-10 ml-4 text-5xl font-bold max-lg:mt-28 max-lg:text-5xl max-md:text-4xl max-sm:mb-16 max-sm:text-3xl lg:ml-10 lg:w-1/2 lg:text-left"
+		class="-mt-10 ml-4 text-5xl font-bold max-lg:mt-28 max-lg:text-center max-lg:text-5xl max-md:text-4xl max-sm:mb-16 max-sm:text-3xl max-2xs:text-2xl lg:ml-10 lg:w-1/2 lg:text-left"
 	>
 		Machine Learning
 	</h1>
@@ -53,7 +53,9 @@
 	<!-- Buttons on the right -->
 	<div class="mt-10 lg:mt-0 lg:flex lg:w-1/2 lg:justify-end">
 		<div class="w-full lg:w-auto">
-			<h3 class="-mt-10 mb-4 text-right text-lg font-semibold max-sm:text-lg">
+			<h3
+				class="-mt-10 mb-4 text-right text-lg font-semibold max-lg:mb-8 max-lg:mt-8 max-lg:text-center max-sm:text-lg"
+			>
 				Select Application<br />
 				<p class="ml-4 text-sm">Choose Any</p>
 			</h3>
