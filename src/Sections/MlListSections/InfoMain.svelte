@@ -1,4 +1,6 @@
 <script>
+	import { fade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 	import spamImg from '$lib/MLListPage/spam.svg';
 	import textsumImg from '$lib/MLListPage/textsum.svg';
 	import speechImg from '$lib/MLListPage/microphone.svg';
@@ -21,7 +23,7 @@
 			description: 'Summarizes a Given Text',
 			img: textsumImg,
 			summary:
-				'Text Summation involves extracting key information and summarizing the contents of a given document using various algorithms like extractive or abstractive methods.'
+				'Text summation in machine learning, also known as text summarization, involves condensing large amounts of text into a shorter version while preserving key information.'
 		},
 		{
 			id: 3,
@@ -29,7 +31,7 @@
 			description: 'STT and TTS',
 			img: speechImg,
 			summary:
-				'Speech Transformation covers both Speech-to-Text (STT) and Text-to-Speech (TTS) capabilities using advanced deep learning techniques.'
+				'Speech recognition in machine learning involves converting spoken language into text using algorithms like deep learning, acoustic models, and feature extraction. It enhances applications like virtual assistants and real-time transcription.'
 		},
 		{
 			id: 4,
@@ -37,7 +39,7 @@
 			description: 'Provides sentiment',
 			img: sentimentImg,
 			summary:
-				'Sentiment analysis determines the sentiment expressed in a given text, such as positive, negative, or neutral, using natural language processing techniques.'
+				'Sentiment analysis in machine learning classifies emotions in text, identifying positive, negative, or neutral sentiments. It uses natural language processing, text mining, and deep learning to interpret opinions and emotions accurately.'
 		},
 		{
 			id: 5,
@@ -45,14 +47,15 @@
 			description: 'Generates an Abstract Text Paragraph',
 			img: textgenImg,
 			summary:
-				'Text Generation models create human-like text based on a given input prompt using AI technologies like GPT models.'
+				'Text generation is a task in natural language processing (NLP) where a model generates coherent and contextually relevant text based on a given input prompt. It utilizes deep learning models, such as GPT (Generative Pre-trained Transformer), to predict and construct sentences. These models are trained on vast datasets, enabling them to produce human-like and creative text for applications like chatbots, story writing, and summarization.'
 		}
 	];
 
-	let currentSummary = 'Hover over any button to see more details.';
+	let currentSummary =
+		'Spam detection in machine learning involves training models to identify and filter out unwanted or malicious emails. Techniques such as Naive Bayes, support vector machines (SVM), and deep learning algorithms are commonly used.';
 
 	function handleHover(event) {
-		const { index, title, description } = event.detail;
+		const { index } = event.detail;
 		currentSummary =
 			buttons.find((button) => button.id === index)?.summary || 'No details available.';
 	}
@@ -77,7 +80,12 @@
 			class="mt-8 h-[59vh] max-h-[80vh] w-full max-w-full rounded-2xl bg-opacity-80 bg-gradient-to-r from-purple-500 to-pink-500 p-6 shadow-lg max-lg:h-auto max-md:p-4 max-sm:mx-auto max-sm:h-auto max-sm:w-[90%] max-xs:mx-auto max-xs:h-auto max-xs:w-[95%] lg:ml-10 lg:mt-10"
 		>
 			<h2 class="mb-4 text-2xl font-bold text-white max-xl:text-xl max-sm:text-lg">Summary</h2>
-			<p class="max-xl:text-md text-lg text-white max-sm:text-sm">
+			<p
+				class="max-xl:text-md fade-transform text-lg text-white max-sm:text-sm"
+				transition:fade={{ duration: 300 }}
+				on:mouseenter={() => event.target.classList.add('fade-transform-active')}
+				on:mouseleave={() => event.target.classList.remove('fade-transform-active')}
+			>
 				{currentSummary}
 			</p>
 		</div>
@@ -109,3 +117,13 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.fade-transform {
+		transform: translateY(10px);
+		transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+	.fade-transform-active {
+		transform: translateY(0);
+	}
+</style>
