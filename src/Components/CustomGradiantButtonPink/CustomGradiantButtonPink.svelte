@@ -1,12 +1,30 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
 	export let index = '';
 	export let title = '';
 	export let description = '';
 	export let img = '';
+
+	const dispatch = createEventDispatcher();
+
+	// Dispatch event when mouse enters the button
+	function handleMouseEnter() {
+		console.log('DEBUG Mouse ENtered');
+		dispatch('hover', { index, title, description });
+	}
+
+	// Dispatch event when mouse leaves the button
+	function handleMouseLeave() {
+		console.log('DEBUG Mouse Left');
+		dispatch('leave');
+	}
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	class="flex w-full items-center justify-start rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-4 text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-purple-200 max-2xs:p-2 lg:w-80 dark:focus:ring-purple-800"
+	on:mouseenter={handleMouseEnter}
 >
 	<!-- Index Section -->
 	<div class="max-2xs:text-md mr-4 flex-shrink-0 text-lg font-semibold text-black">
