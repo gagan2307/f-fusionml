@@ -54,7 +54,7 @@
 			<textarea
 				id="spam-input"
 				bind:value={inputText}
-				class="h-[200px] w-full rounded-lg border border-gray-300 p-4 focus:outline-none focus:ring-2 focus:ring-purple-500 max-sm:text-base"
+				class="h-[200px] w-full rounded-lg border border-gray-300 p-4 focus:outline-none focus:ring-2 focus:ring-purple-500 max-lg:h-[150px] max-sm:text-base"
 				rows="4"
 				placeholder="Enter Text"
 			></textarea>
@@ -85,7 +85,7 @@
 	<!-- Prediction Button -->
 	<button
 		on:click={handlePrediction}
-		class="mt-6 w-1/2 max-w-xs rounded-full bg-purple-500 py-3 text-white shadow-md transition duration-300 ease-in-out hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300"
+		class="mb-[20px] mt-6 w-1/2 max-w-xs rounded-full bg-purple-500 py-3 text-white shadow-md transition duration-300 ease-in-out hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300"
 	>
 		Prediction
 	</button>
@@ -95,7 +95,6 @@
 		isOpen={showModal}
 		{isLoading}
 		title="Prediction Result"
-		content={`Input Text: ${inputText}`}
 		additionalContent={`Prediction: ${predictionResult}`}
 		on:close={() => (showModal = false)}
 	/>

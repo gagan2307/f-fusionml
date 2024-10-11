@@ -8,7 +8,7 @@ local_model_dir = "./local_spam_model"
 tokenizer = AutoTokenizer.from_pretrained(local_model_dir)
 model = AutoModelForSequenceClassification.from_pretrained(local_model_dir)
 
-accessToken = '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'
+# accessToken = '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'
 
 def make_prediction(input_text):
     # Tokenize and encode the input text
@@ -21,9 +21,9 @@ def make_prediction(input_text):
 
     # Interpret the results
     if predictions[0] == 1:
-        return "spam"
+        return "Spam"
     else:
-        return "not spam"
+        return "Not spam"
 
 if __name__ == "__main__":
     # Read input text from stdin

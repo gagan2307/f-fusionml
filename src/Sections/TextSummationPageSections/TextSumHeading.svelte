@@ -5,10 +5,10 @@
 	<h1
 		class="mt-[80px] flex justify-center text-6xl max-lg:text-5xl max-md:text-4xl max-3xs:text-3xl"
 	>
-		Spam Detection
+		TEXT SUMMATION
 	</h1>
 	<p class="max-3xs:text-md mt-[20px] flex justify-center text-2xl max-lg:text-xl max-md:text-lg">
-		Checks weather the message is Spam or Ham
+		Provides a Summery of the given text
 	</p>
 </div>
 
