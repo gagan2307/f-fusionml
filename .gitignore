@@ -24,4 +24,5 @@ vite.config.ts.timestamp-*
 **/local_spam_model/
 src/python/ml/spam-detection/local_spam_model/
 **/local_text_summarizer_model/
+**/multilingual_sentiment_model/
 

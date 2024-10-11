@@ -43,7 +43,7 @@
 			img: sentimentImg,
 			summary:
 				'Sentiment analysis in machine learning classifies emotions in text, identifying positive, negative, or neutral sentiments. It uses natural language processing, text mining, and deep learning to interpret opinions and emotions accurately.',
-			link: 'spam-detection'
+			link: 'sentiment-analyzer'
 		},
 		{
 			id: 5,

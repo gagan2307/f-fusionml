@@ -8,8 +8,8 @@ export async function POST({ request }) {
         const data = await request.json();
         const inputText = data.inputText;
 
-        const scriptPath = path.resolve('src/python/ml/text-summation/text_summarizer.py');
-        const modelDir = path.resolve('src/python/ml/text-summation');
+        const scriptPath = path.resolve('src/python/ml/sentiment-analyzer/sentiment_analyzer.py');
+        const modelDir = path.resolve('src/python/ml/sentiment-analyzer');
 
         // Spawn the Python process
         const pythonProcess = spawn('python', [scriptPath], {
