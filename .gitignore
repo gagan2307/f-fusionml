@@ -19,3 +19,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+#modals
+**/local_spam_model/
+src/python/ml/spam-detection/local_spam_model/
+
