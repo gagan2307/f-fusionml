@@ -25,6 +25,7 @@
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.6.0",
 		"@sveltejs/adapter-node": "^5.2.2",
+		"axios": "^1.7.7",
 		"f-fusionml": "file:",
 		"svelte-adapter-static-digitalocean": "^3.0.0"
 	}

@@ -1,10 +1,12 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let index = '';
 	export let title = '';
 	export let description = '';
 	export let img = '';
+	export let source = '';
 
 	const dispatch = createEventDispatcher();
 
@@ -22,9 +24,13 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<button
 	class="flex w-full items-center justify-start rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-4 text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-purple-200 max-2xs:p-2 lg:w-80 dark:focus:ring-purple-800"
 	on:mouseenter={handleMouseEnter}
+	on:click={() => {
+		goto(`/ml/${source}`);
+	}}
 >
 	<!-- Index Section -->
 	<div class="max-2xs:text-md mr-4 flex-shrink-0 text-lg font-semibold text-black">
@@ -45,7 +51,7 @@
 		<h2 class="text-left text-lg font-semibold max-2xs:text-sm">{title}</h2>
 		<p class="text-left text-sm max-2xs:text-xs">{description}</p>
 	</div>
-</div>
+</button>
 
 <style>
 	/* Additional styles if needed */
