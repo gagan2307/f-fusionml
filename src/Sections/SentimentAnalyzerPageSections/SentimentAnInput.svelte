@@ -1,16 +1,45 @@
 <script>
-	import { onMount } from 'svelte';
+	import axios from 'axios';
+	import CustomModal from '../../Components/CustomModal/CustomModal.svelte';
+	import { tick } from 'svelte';
+
 	let inputText = '';
 	let resultText = 'Result';
 
-	function analyzeText() {
-		// Placeholder function for analyzing text
-		// You can replace this with the actual logic or API call
+	let showModal = false;
+	let isLoading = false;
+
+	async function analyzeText() {
 		if (inputText.trim() === '') {
-			resultText = 'Please enter some text!';
-		} else {
-			// Example analysis result (replace with actual API call result)
-			resultText = 'Analysis result will be displayed here.';
+			alert('Please enter some text before analyzing.');
+			return;
+		}
+
+		// Reset states
+		isLoading = true;
+		showModal = true;
+
+		// Wait for DOM to update so the modal appears
+		await tick();
+
+		try {
+			const response = await axios.post('/api/sentiment-analyzer', { inputText });
+
+			if (response.status !== 200) {
+				throw new Error('Network response was not ok');
+			}
+
+			resultText = response.data.result || 'No result received.';
+		} catch (error) {
+			console.error('Error:', error);
+			resultText = 'Error analyzing text.';
+		} finally {
+			isLoading = false;
+
+			// Automatically close the modal after a brief delay to show the result
+			setTimeout(() => {
+				showModal = false;
+			}, 500); // Adjust the delay as needed
 		}
 	}
 
@@ -62,11 +91,23 @@
 	</button>
 </div>
 
+<!-- Modal -->
+<CustomModal
+	isOpen={showModal}
+	{isLoading}
+	title="Analyzing Sentiment"
+	additionalContent={isLoading ? 'Processing...' : ''}
+	on:close={() => (showModal = false)}
+/>
+
 <style>
 	textarea {
 		font-family: 'Arial', sans-serif;
 		background-color: #ffffff;
 	}
+
+	/* Loader styles (optional, if you have a loader in your CustomModal) */
+	/* Add any custom styles here */
 
 	/* Responsive design */
 	@media (max-width: 768px) {

@@ -1,65 +1,65 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import spamImg from '$lib/MLListPage/spam.svg';
-	import textsumImg from '$lib/MLListPage/textsum.svg';
-	import speechImg from '$lib/MLListPage/microphone.svg';
-	import sentimentImg from '$lib/MLListPage/smile.svg';
-	import textgenImg from '$lib/MLListPage/textgen.svg';
+	import imageToTextImg from '$lib/DLListPage/imageToText.svg';
+	import movieGenreImg from '$lib/DLListPage/movie.svg';
+	import imageClassificationImg from '$lib/DLListPage/imageClassification.svg';
+	import musicGenreImg from '$lib/DLListPage/music.svg';
+	import imageSentimentImg from '$lib/DLListPage/sentimentImage.svg';
 	import CustomGradiantButtonPink from '../../Components/CustomGradiantButtonPink/CustomGradiantButtonPink.svelte';
 
 	const buttons = [
 		{
 			id: 1,
-			title: 'Spam Detection',
-			description: 'Check for Spam/Ham',
-			img: spamImg,
+			title: 'Image to Text',
+			description: 'Convert images into text descriptions',
+			img: imageToTextImg,
 			summary:
-				'Spam detection in machine learning involves training models to identify and filter out unwanted or malicious emails. Techniques such as Naive Bayes, support vector machines (SVM), and deep learning algorithms are commonly used.',
-			link: '/ml/spam-detection'
+				'Image to text conversion utilizes deep learning models such as Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs) to interpret images and generate descriptive text captions. This technology is essential for applications like automatic image captioning and aiding visually impaired users.',
+			link: '/dl/image-to-text'
 		},
 		{
 			id: 2,
-			title: 'Text Summation',
-			description: 'Summarizes a Given Text',
-			img: textsumImg,
+			title: 'Movie Genre Prediction',
+			description: 'Predict genres from movie plots',
+			img: movieGenreImg,
 			summary:
-				'Text summation in machine learning, also known as text summarization, involves condensing large amounts of text into a shorter version while preserving key information.',
-			link: '/ml/text-summation'
+				'Movie genre prediction uses deep learning to analyze movie plots or scripts and predict the genres they belong to. Models like LSTMs and Transformers capture semantic meanings in text to make accurate genre classifications, enhancing recommendation systems and content analysis.',
+			link: '/dl/movie-genere'
 		},
 		{
 			id: 3,
-			title: 'Speech Transformation',
-			description: 'STT and TTS',
-			img: speechImg,
+			title: 'Image Classification',
+			description: 'Classify images into categories',
+			img: imageClassificationImg,
 			summary:
-				'Speech recognition in machine learning involves converting spoken language into text using algorithms like deep learning, acoustic models, and feature extraction. It enhances applications like virtual assistants and real-time transcription.',
-			link: '/ml/spam-detection'
+				'Image classification involves training deep learning models, primarily Convolutional Neural Networks (CNNs), to categorize images into predefined classes. This is fundamental in computer vision tasks such as object recognition, autonomous driving, and medical image analysis.',
+			link: '/dl/image-classification'
 		},
 		{
 			id: 4,
-			title: 'Sentiment Analyser',
-			description: 'Provides sentiment',
-			img: sentimentImg,
+			title: 'Music Genre Prediction',
+			description: 'Predict genres from audio files',
+			img: musicGenreImg,
 			summary:
-				'Sentiment analysis in machine learning classifies emotions in text, identifying positive, negative, or neutral sentiments. It uses natural language processing, text mining, and deep learning to interpret opinions and emotions accurately.',
-			link: '/ml/sentiment-analyzer'
+				'Music genre prediction employs deep learning to analyze audio features and classify music into genres. Techniques include spectrogram analysis and models like CNNs and RNNs to process temporal audio data, aiding in music recommendation systems and audio content analysis.',
+			link: '/dl/music-genere'
 		},
 		{
 			id: 5,
-			title: 'Text Generation',
-			description: 'Generates an Abstract Text Paragraph',
-			img: textgenImg,
+			title: 'Sentiment Analysis from Image',
+			description: 'Detect sentiment from images',
+			img: imageSentimentImg,
 			summary:
-				'Text generation is a task in natural language processing (NLP) where a model generates coherent and contextually relevant text based on a given input prompt. It utilizes deep learning models, such as GPT (Generative Pre-trained Transformer), to predict and construct sentences. These models are trained on vast datasets, enabling them to produce human-like and creative text for applications like chatbots, story writing, and summarization.',
-			link: '/ml/spam-detection'
+				'Sentiment analysis from images uses deep learning to interpret the emotional content conveyed through visuals. Models analyze facial expressions, body language, and visual context to determine sentiments or emotions, aiding in applications like mood detection and user experience analysis.',
+			link: '/dl/image-sentiment-analysis'
 		}
 	];
 
-	let currentTitle = 'Spam Detection';
+	let currentTitle = 'Image to Text';
 
 	let currentSummary =
-		'Spam detection in machine learning involves training models to identify and filter out unwanted or malicious emails. Techniques such as Naive Bayes, support vector machines (SVM), and deep learning algorithms are commonly used.';
+		'Image to text conversion utilizes deep learning models such as Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs) to interpret images and generate descriptive text captions. This technology is essential for applications like automatic image captioning and aiding visually impaired users.';
 
 	function handleHover(event) {
 		const { index } = event.detail;
@@ -80,7 +80,7 @@
 		<h1
 			class="-mt-28 ml-4 text-5xl font-bold max-lg:mt-28 max-lg:text-center max-lg:text-5xl max-md:text-4xl max-sm:mb-16 max-sm:text-3xl max-2xs:text-2xl lg:ml-10 lg:mt-20 lg:text-left"
 		>
-			Machine Learning
+			Deep Learning
 		</h1>
 
 		<!-- Summary Section -->

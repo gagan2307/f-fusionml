@@ -1,7 +1,16 @@
-# run_multilingual_sentiment.py
+# sentiment_analyzer.py
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+import sys
+
+# Read input text from stdin
+text = sys.stdin.read().strip()
+
+# Handle empty input
+if not text:
+    print("Error: No input text provided.")
+    sys.exit(1)
 
 # Specify the local directory where the model is saved
 local_model_dir = "./multilingual_sentiment_model"
@@ -9,9 +18,6 @@ local_model_dir = "./multilingual_sentiment_model"
 # Load the tokenizer and model from the local directory
 tokenizer = AutoTokenizer.from_pretrained(local_model_dir)
 model = AutoModelForSequenceClassification.from_pretrained(local_model_dir)
-
-# Sample text for sentiment analysis (you can replace this with any text)
-text = "I amnotin the moodright now"
 
 # Encode the text
 inputs = tokenizer.encode_plus(
@@ -35,5 +41,5 @@ predicted_class = torch.argmax(logits, dim=1).item()
 label_map = {0: 'positive', 1: 'neutral', 2: 'negative'}
 sentiment = label_map.get(predicted_class, 'unknown')
 
-print(f"Text: {text.strip()}")
-print(f"Predicted sentiment: {sentiment}")
+# Output the sentiment result
+print(sentiment)

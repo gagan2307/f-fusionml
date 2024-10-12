@@ -1,3 +1,5 @@
+// +server.js
+
 import { json } from '@sveltejs/kit';
 import { spawn } from 'child_process';
 import { once } from 'events';
@@ -18,7 +20,6 @@ export async function POST({ request }) {
         });
 
         // Write the inputText to the Python process's stdin
-        // console.log('DEBUG TEXT DATA: ', inputText)
         pythonProcess.stdin.write(inputText);
         pythonProcess.stdin.end();
 

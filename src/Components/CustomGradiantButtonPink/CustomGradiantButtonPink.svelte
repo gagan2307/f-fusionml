@@ -29,7 +29,7 @@
 	class="flex w-full items-center justify-start rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-4 text-white hover:bg-gradient-to-l focus:outline-none focus:ring-4 focus:ring-purple-200 max-2xs:p-2 lg:w-80 dark:focus:ring-purple-800"
 	on:mouseenter={handleMouseEnter}
 	on:click={() => {
-		goto(`/ml/${source}`);
+		goto(`${source}`);
 	}}
 >
 	<!-- Index Section -->

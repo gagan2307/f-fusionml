@@ -19,7 +19,7 @@
 		<SpamDHeading />
 	</section>
 
-	<section id="heading-spam">
+	<section id="input-spam">
 		<SpamDInput />
 	</section>
 </main>
