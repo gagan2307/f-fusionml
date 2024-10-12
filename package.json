@@ -27,6 +27,7 @@
 		"@sveltejs/adapter-node": "^5.2.2",
 		"axios": "^1.7.7",
 		"f-fusionml": "file:",
-		"svelte-adapter-static-digitalocean": "^3.0.0"
+		"svelte-adapter-static-digitalocean": "^3.0.0",
+		"uuid": "^10.0.0"
 	}
 }
