@@ -27,3 +27,4 @@ src/python/ml/spam-detection/local_spam_model/
 **/multilingual_sentiment_model/
 **/modelweth.h5
 **/additional_data_weth.pkl
+**/blip_image_caption_model/
