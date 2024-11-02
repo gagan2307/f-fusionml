@@ -28,3 +28,4 @@ src/python/ml/spam-detection/local_spam_model/
 **/modelweth.h5
 **/additional_data_weth.pkl
 **/blip_image_caption_model/
+**/local_image_analyzer_model/
