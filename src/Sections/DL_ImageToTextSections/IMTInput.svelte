@@ -74,7 +74,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-center gap-6 p-4">
-    <div class="mb-4 text-center text-2xl font-bold">Upload Image for Captioning</div>
+    <div class="mb-4 text-center text-2xl font-bold">Upload Image for Analysis</div>
     <div class="flex w-full max-w-6xl flex-col gap-8 md:flex-row">
         <!-- Upload Image Section -->
         <div class="flex w-full flex-col rounded-lg bg-white/80 p-6 shadow-lg md:w-2/3">
