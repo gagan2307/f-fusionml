@@ -27,7 +27,7 @@
 
 		try {
 			const formData = new FormData();
-			formData.append('file', selectedFile);
+			formData.append('image', selectedFile);
 
 			const response = await axios.post('/api/dl-sentiment-analyzer', formData, {
 				headers: {

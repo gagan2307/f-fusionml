@@ -27,33 +27,33 @@
 				'Text summation in machine learning, also known as text summarization, involves condensing large amounts of text into a shorter version while preserving key information.',
 			link: '/ml/text-summation'
 		},
+		// {
+		// 	id: 4,
+		// 	title: 'Speech Transformation',
+		// 	description: 'STT and TTS',
+		// 	img: speechImg,
+		// 	summary:
+		// 		'Speech recognition in machine learning involves converting spoken language into text using algorithms like deep learning, acoustic models, and feature extraction. It enhances applications like virtual assistants and real-time transcription.',
+		// 	link: '/ml/spam-detection'
+		// },
 		{
 			id: 3,
-			title: 'Speech Transformation',
-			description: 'STT and TTS',
-			img: speechImg,
-			summary:
-				'Speech recognition in machine learning involves converting spoken language into text using algorithms like deep learning, acoustic models, and feature extraction. It enhances applications like virtual assistants and real-time transcription.',
-			link: '/ml/spam-detection'
-		},
-		{
-			id: 4,
 			title: 'Sentiment Analyser',
 			description: 'Provides sentiment',
 			img: sentimentImg,
 			summary:
 				'Sentiment analysis in machine learning classifies emotions in text, identifying positive, negative, or neutral sentiments. It uses natural language processing, text mining, and deep learning to interpret opinions and emotions accurately.',
 			link: '/ml/sentiment-analyzer'
-		},
-		{
-			id: 5,
-			title: 'Text Generation',
-			description: 'Generates an Abstract Text Paragraph',
-			img: textgenImg,
-			summary:
-				'Text generation is a task in natural language processing (NLP) where a model generates coherent and contextually relevant text based on a given input prompt. It utilizes deep learning models, such as GPT (Generative Pre-trained Transformer), to predict and construct sentences. These models are trained on vast datasets, enabling them to produce human-like and creative text for applications like chatbots, story writing, and summarization.',
-			link: '/ml/spam-detection'
 		}
+		// {
+		// 	id: 5,
+		// 	title: 'Text Generation',
+		// 	description: 'Generates an Abstract Text Paragraph',
+		// 	img: textgenImg,
+		// 	summary:
+		// 		'Text generation is a task in natural language processing (NLP) where a model generates coherent and contextually relevant text based on a given input prompt. It utilizes deep learning models, such as GPT (Generative Pre-trained Transformer), to predict and construct sentences. These models are trained on vast datasets, enabling them to produce human-like and creative text for applications like chatbots, story writing, and summarization.',
+		// 	link: '/ml/spam-detection'
+		// }
 	];
 
 	let currentTitle = 'Spam Detection';

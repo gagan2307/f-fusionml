@@ -18,17 +18,17 @@
 				'Image to text conversion utilizes deep learning models such as Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs) to interpret images and generate descriptive text captions. This technology is essential for applications like automatic image captioning and aiding visually impaired users.',
 			link: '/dl/image-to-text'
 		},
+		// {
+		// 	id: 5,
+		// 	title: 'Movie Genre Prediction',
+		// 	description: 'Predict genres from movie plots',
+		// 	img: movieGenreImg,
+		// 	summary:
+		// 		'Movie genre prediction uses deep learning to analyze movie plots or scripts and predict the genres they belong to. Models like LSTMs and Transformers capture semantic meanings in text to make accurate genre classifications, enhancing recommendation systems and content analysis.',
+		// 	link: '/dl/movie-genere'
+		// },
 		{
 			id: 2,
-			title: 'Movie Genre Prediction',
-			description: 'Predict genres from movie plots',
-			img: movieGenreImg,
-			summary:
-				'Movie genre prediction uses deep learning to analyze movie plots or scripts and predict the genres they belong to. Models like LSTMs and Transformers capture semantic meanings in text to make accurate genre classifications, enhancing recommendation systems and content analysis.',
-			link: '/dl/movie-genere'
-		},
-		{
-			id: 3,
 			title: 'Image Classification',
 			description: 'Classify images into categories',
 			img: imageClassificationImg,
@@ -36,17 +36,17 @@
 				'Image classification involves training deep learning models, primarily Convolutional Neural Networks (CNNs), to categorize images into predefined classes. This is fundamental in computer vision tasks such as object recognition, autonomous driving, and medical image analysis.',
 			link: '/dl/image-classification'
 		},
+		// {
+		// 	id: 4,
+		// 	title: 'Music Genre Prediction',
+		// 	description: 'Predict genres from audio files',
+		// 	img: musicGenreImg,
+		// 	summary:
+		// 		'Music genre prediction employs deep learning to analyze audio features and classify music into genres. Techniques include spectrogram analysis and models like CNNs and RNNs to process temporal audio data, aiding in music recommendation systems and audio content analysis.',
+		// 	link: '/dl/music-genere'
+		// },
 		{
-			id: 4,
-			title: 'Music Genre Prediction',
-			description: 'Predict genres from audio files',
-			img: musicGenreImg,
-			summary:
-				'Music genre prediction employs deep learning to analyze audio features and classify music into genres. Techniques include spectrogram analysis and models like CNNs and RNNs to process temporal audio data, aiding in music recommendation systems and audio content analysis.',
-			link: '/dl/music-genere'
-		},
-		{
-			id: 5,
+			id: 3,
 			title: 'Sentiment Analysis from Image',
 			description: 'Detect sentiment from images',
 			img: imageSentimentImg,

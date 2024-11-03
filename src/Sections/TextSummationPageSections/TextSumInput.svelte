@@ -1,7 +1,7 @@
 <script>
 	import axios from 'axios';
 	import CustomModal from '../../Components/CustomModal/CustomModal.svelte';
-	import { tick } from 'svelte'; // Import tick from 'svelte'
+	import { tick } from 'svelte';
 
 	let inputText = '';
 	let showModal = false;
@@ -34,7 +34,8 @@
 			predictionResult = 'Error occurred during prediction.';
 		} finally {
 			isLoading = false;
-			// The modal remains open, and the content is updated
+			// Hide the modal after the prediction is complete
+			showModal = false;
 		}
 	}
 </script>
@@ -72,6 +73,15 @@
 		Prediction
 	</button>
 </div>
+
+<!-- Modal -->
+<CustomModal
+	isOpen={showModal}
+	{isLoading}
+	title="Loading"
+	additionalContent="Please wait while the prediction is being processed."
+	on:close={() => (showModal = false)}
+/>
 
 <style>
 	textarea {
