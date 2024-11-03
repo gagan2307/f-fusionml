@@ -28,12 +28,11 @@ export async function POST({ request }) {
 			const scriptPath = path.resolve(
 				'src/python/dl/image-sentiment-analyzer/Image_sentiment_analyzer.py'
 			);
-			const modelDir = path.resolve('src/python/dl/image-sentiment-analyzer');
 
-			// Spawn the Python process
+			// Spawn the Python process with the image path as an argument
 			const pythonProcess = spawn('python', [scriptPath, tempImagePath], {
 				cwd: path.dirname(scriptPath),
-				stdio: ['pipe', 'pipe', 'pipe']
+				stdio: ['ignore', 'pipe', 'pipe']
 			});
 
 			let result = '';
@@ -54,7 +53,7 @@ export async function POST({ request }) {
 			const [code] = await once(pythonProcess, 'close');
 
 			if (code === 0) {
-				return json({ caption: result.trim() });
+				return json({ sentiment: result.trim() });
 			} else {
 				console.error(`Python script exited with code ${code}`);
 				return new Response(`Error: ${error || 'Unknown error'}`, { status: 500 });
