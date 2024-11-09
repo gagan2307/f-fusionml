@@ -38,8 +38,26 @@ def predict_sentiment(inputs, model):
         outputs = model(**inputs)
         logits = outputs.logits
         predicted_class_idx = logits.argmax(-1).item()
-        predicted_label = model.config.id2label[predicted_class_idx]
-    return predicted_label
+        raw_label = model.config.id2label[str(predicted_class_idx)]
+        # Map raw label to sentiment if needed
+        sentiment = map_label_to_sentiment(raw_label)
+    return sentiment
+
+def map_label_to_sentiment(raw_label):
+    """
+    Map the raw label from the model to a human-readable sentiment.
+    """
+    # Define the mapping based on the model's labels
+    sentiment_mapping = {
+        '0': 'Angry',
+        '1': 'Disgust',
+        '2': 'Fear',
+        '3': 'Happy',
+        '4': 'Sad',
+        '5': 'Surprise',
+        '6': 'Neutral'
+    }
+    return sentiment_mapping.get(raw_label, 'Unknown')
 
 def main():
     # Read the image path from command line arguments
@@ -59,7 +77,7 @@ def main():
         processor, model = load_model_and_processor(model_dir)
         inputs = preprocess_image(image_path, processor)
         predicted_label = predict_sentiment(inputs, model)
-        print(predicted_label)  # Output the predicted label to stdout
+        print(predicted_label)  # Output the predicted sentiment to stdout
     except Exception as e:
         print(f"Error during prediction: {e}", file=sys.stderr)
         sys.exit(1)

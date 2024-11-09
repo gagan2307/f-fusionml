@@ -1,8 +1,9 @@
+<!-- +layout.svelte -->
 <script>
 	import '../app.css';
-	import BG from '$lib/MLListPage/background.png';
-
 	import '@fortawesome/fontawesome-free/css/all.min.css';
+	import Chatbot from '../Components/Chatbot/Chatbot.svelte';
 </script>
 
 <slot></slot>
+<Chatbot />
