@@ -1,137 +1,172 @@
-<!-- ImageSemInput.svelte -->
-
 <script>
+	import { onMount, onDestroy } from 'svelte';
 	import axios from 'axios';
-	import CustomModal from '../../Components/CustomModal/CustomModal.svelte';
-	import { tick } from 'svelte';
 
-	let selectedFile = null;
+	let videoElement;
+	let canvasElement;
+	let overlayCanvas;
+	let isCameraActive = false;
 	let sentimentResult = 'Sentiment will appear here.';
-	let imageUrl = null; // To display the selected image
+	let intervalId;
 
-	let showModal = false;
-	let isLoading = false;
-
-	async function analyzeImage() {
-		if (!selectedFile) {
-			alert('Please select an image file before analyzing.');
-			return;
-		}
-
-		// Reset states
-		isLoading = true;
-		showModal = true;
-
-		// Wait for DOM to update so the modal appears
-		await tick();
-
+	async function startCamera() {
 		try {
-			const formData = new FormData();
-			formData.append('image', selectedFile);
+			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+			videoElement.srcObject = stream;
+			isCameraActive = true;
 
-			const response = await axios.post('/api/dl-sentiment-analyzer', formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data'
-				}
-			});
-
-			if (response.status !== 200) {
-				throw new Error('Network response was not ok');
-			}
-
-			sentimentResult = response.data.sentiment || 'No result received.';
+			// Start capturing frames every second
+			intervalId = setInterval(captureFrame, 1000);
 		} catch (error) {
-			console.error('Error:', error);
-			sentimentResult = 'Error analyzing image.';
-		} finally {
-			isLoading = false;
-
-			// Automatically close the modal after a brief delay to show the result
-			setTimeout(() => {
-				showModal = false;
-			}, 500); // Adjust the delay as needed
+			console.error('Error accessing the camera:', error);
+			alert('Could not access the camera.');
 		}
 	}
 
-	function clearFile() {
-		selectedFile = null;
-		imageUrl = null; // Clear the image URL when the file is cleared
+	function stopCamera() {
+		if (videoElement && videoElement.srcObject) {
+			videoElement.srcObject.getTracks().forEach((track) => track.stop());
+		}
+		isCameraActive = false;
+		clearInterval(intervalId);
 		sentimentResult = 'Sentiment will appear here.';
-	}
-
-	function handleFileChange(event) {
-		const file = event.target.files[0];
-		if (file) {
-			selectedFile = file;
-
-			// Use FileReader to read the image and set the imageUrl
-			const reader = new FileReader();
-			reader.onload = function (e) {
-				imageUrl = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		} else {
-			selectedFile = null;
-			imageUrl = null;
+		if (overlayCanvas) {
+			const ctx = overlayCanvas.getContext('2d');
+			ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 		}
 	}
+
+	async function captureFrame() {
+		if (!videoElement || !canvasElement || !overlayCanvas) return;
+
+		// Set canvas size to video size
+		canvasElement.width = videoElement.videoWidth;
+		canvasElement.height = videoElement.videoHeight;
+
+		overlayCanvas.width = videoElement.videoWidth;
+		overlayCanvas.height = videoElement.videoHeight;
+
+		const context = canvasElement.getContext('2d');
+		context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+		// Convert canvas to blob
+		canvasElement.toBlob(
+			async function (blob) {
+				if (blob) {
+					try {
+						const formData = new FormData();
+						formData.append('image', blob, 'frame.jpg');
+
+						const response = await axios.post('/api/dl-sentiment-analyzer', formData, {
+							headers: {
+								'Content-Type': 'multipart/form-data'
+							}
+						});
+
+						if (response.status !== 200) {
+							throw new Error('Network response was not ok');
+						}
+
+						const data = response.data;
+						if (data.sentiments && data.sentiments.length > 0) {
+							// Clear the overlay canvas
+							const overlayCtx = overlayCanvas.getContext('2d');
+							overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+							data.sentiments.forEach((item) => {
+								const { emotion, box } = item;
+								const [x, y, w, h] = box;
+
+								// Adjust coordinates if video is mirrored
+								const adjustedX = overlayCanvas.width - x - w;
+
+								// Draw rectangle
+								overlayCtx.strokeStyle = 'green';
+								overlayCtx.lineWidth = 2;
+								overlayCtx.strokeRect(adjustedX, y, w, h);
+
+								// Draw emotion label
+								overlayCtx.font = '16px Arial';
+								overlayCtx.fillStyle = 'red';
+								overlayCtx.fillText(emotion, adjustedX, y - 10);
+							});
+
+							sentimentResult = data.sentiments.map((item) => item.emotion).join(', ');
+						} else {
+							sentimentResult = 'No faces detected.';
+							const overlayCtx = overlayCanvas.getContext('2d');
+							overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+						}
+					} catch (error) {
+						console.error('Error:', error);
+						sentimentResult = 'Error analyzing image.';
+					}
+				}
+			},
+			'image/jpeg',
+			0.8
+		); // Adjust quality if needed
+	}
+
+	onDestroy(() => {
+		stopCamera();
+	});
 </script>
 
 <div class="flex flex-col items-center justify-center gap-6 p-4">
-	<div class="mb-4 text-center text-2xl font-bold">Upload Image for Sentiment Analysis</div>
-	<div class="flex w-full max-w-6xl flex-col gap-8 md:flex-row">
-		<!-- Upload Image Section -->
-		<div class="flex w-full flex-col rounded-lg bg-white/80 p-6 shadow-lg md:w-2/3">
-			<h2 class="mb-4 text-center text-2xl font-bold">Select Image</h2>
-			<input type="file" accept="image/*" on:change={handleFileChange} />
-			{#if imageUrl}
-				<div class="mt-4 flex justify-center">
-					<img src={imageUrl} alt="Selected Image" class="h-auto max-w-full" />
-				</div>
-			{/if}
-			<button
-				on:click={clearFile}
-				class="mt-2 self-end rounded-full bg-gray-200 p-2 transition duration-150 ease-in-out hover:bg-gray-300"
-				title="Clear File"
-			>
-				🗑️
-			</button>
-		</div>
+	<div class="mb-4 text-center text-2xl font-bold">Webcam Sentiment Analysis</div>
 
-		<!-- Result Section -->
-		<div class="flex w-full flex-col rounded-lg bg-white/80 p-6 shadow-lg md:w-1/3">
-			<h2 class="mb-4 text-center text-2xl font-bold">Sentiment Result</h2>
-			<textarea
-				bind:value={sentimentResult}
-				class="h-40 w-full resize-none overflow-auto rounded-md border border-gray-300 p-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-				readonly
-				style="background-color: #f8f8f8; white-space: pre-wrap;"
-			></textarea>
-		</div>
+	<!-- Video and Canvas Elements -->
+	<div class="relative">
+		<video bind:this={videoElement} autoplay playsinline style="transform: scaleX(-1);"></video>
+		<canvas bind:this={overlayCanvas} class="overlay-canvas"></canvas>
+		<canvas bind:this={canvasElement} style="display: none;"></canvas>
 	</div>
 
-	<!-- Analyze Button -->
-	<button
-		on:click={analyzeImage}
-		class="mt-6 w-40 rounded-full bg-gray-800 px-4 py-2 text-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
-	>
-		Analyze
-	</button>
+	<!-- Sentiment Result -->
+	<div class="mt-4">
+		<h2 class="mb-2 text-center text-2xl font-bold">Sentiment Result</h2>
+		<div class="text-center text-xl">{sentimentResult}</div>
+	</div>
+
+	<!-- Start/Stop Buttons -->
+	{#if !isCameraActive}
+		<button
+			on:click={startCamera}
+			class="mt-6 w-40 rounded-full bg-gray-800 px-4 py-2 text-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+		>
+			Start Camera
+		</button>
+	{:else}
+		<button
+			on:click={stopCamera}
+			class="mt-6 w-40 rounded-full bg-gray-800 px-4 py-2 text-white shadow-md transition duration-300 ease-in-out hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+		>
+			Stop Camera
+		</button>
+	{/if}
 </div>
 
-<!-- Modal -->
-<CustomModal
-	isOpen={showModal}
-	{isLoading}
-	title="Analyzing Image"
-	additionalContent={isLoading ? 'Processing...' : ''}
-	on:close={() => (showModal = false)}
-/>
-
 <style>
-	/* Add any custom styles here */
-	img {
-		max-width: 100%;
-		height: auto;
+	.relative {
+		position: relative;
+		width: 640px;
+		height: 480px;
+	}
+	video {
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.overlay-canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
 	}
 </style>

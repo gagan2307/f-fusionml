@@ -1,5 +1,3 @@
-// +server.js
-
 import { json } from '@sveltejs/kit';
 import { spawn } from 'child_process';
 import { once } from 'events';
@@ -26,7 +24,7 @@ export async function POST({ request }) {
 			fs.writeFileSync(tempImagePath, imageBuffer);
 
 			const scriptPath = path.resolve(
-				'src/python/dl/image-sentiment-analyzer/Image_sentiment_analyzer.py'
+				'src/python/dl/image-sentiment-analyzer/image_sentiment_analyzer.py'
 			);
 
 			// Spawn the Python process with the image path as an argument
@@ -53,7 +51,14 @@ export async function POST({ request }) {
 			const [code] = await once(pythonProcess, 'close');
 
 			if (code === 0) {
-				return json({ sentiment: result.trim() });
+				let sentiments;
+				try {
+					sentiments = JSON.parse(result);
+				} catch (err) {
+					console.error('Error parsing JSON:', err);
+					return new Response('Error parsing JSON output.', { status: 500 });
+				}
+				return json({ sentiments });
 			} else {
 				console.error(`Python script exited with code ${code}`);
 				return new Response(`Error: ${error || 'Unknown error'}`, { status: 500 });
